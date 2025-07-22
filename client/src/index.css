@@ -1,0 +1,442 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(222, 84%, 4.9%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(222, 84%, 4.9%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(222, 84%, 4.9%);
+  --primary: hsl(221, 83%, 53%);
+  --primary-foreground: hsl(210, 40%, 98%);
+  --secondary: hsl(210, 40%, 96%);
+  --secondary-foreground: hsl(222, 47%, 11%);
+  --muted: hsl(210, 40%, 96%);
+  --muted-foreground: hsl(215, 13%, 65%);
+  --accent: hsl(142, 76%, 36%);
+  --accent-foreground: hsl(355, 7%, 97%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --border: hsl(214, 32%, 91%);
+  --input: hsl(214, 32%, 91%);
+  --ring: hsl(221, 83%, 53%);
+  --chart-1: hsl(221, 83%, 53%);
+  --chart-2: hsl(142, 76%, 36%);
+  --chart-3: hsl(45, 93%, 47%);
+  --chart-4: hsl(0, 84%, 60%);
+  --chart-5: hsl(271, 91%, 65%);
+  --radius: 0.5rem;
+  
+  /* SQL Assistant specific variables */
+  --dark-bg: hsl(222, 84%, 4.9%);
+  --dark-surface: hsl(217, 32%, 17%);
+  --dark-border: hsl(215, 28%, 17%);
+  --sidebar-background: var(--card);
+  --sidebar-foreground: var(--card-foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+}
+
+.dark {
+  --background: hsl(222, 84%, 4.9%);
+  --foreground: hsl(210, 40%, 98%);
+  --card: hsl(217, 32%, 17%);
+  --card-foreground: hsl(210, 40%, 98%);
+  --popover: hsl(217, 32%, 17%);
+  --popover-foreground: hsl(210, 40%, 98%);
+  --primary: hsl(221, 83%, 53%);
+  --primary-foreground: hsl(210, 40%, 98%);
+  --secondary: hsl(217, 32%, 17%);
+  --secondary-foreground: hsl(210, 40%, 98%);
+  --muted: hsl(217, 32%, 17%);
+  --muted-foreground: hsl(215, 20%, 65%);
+  --accent: hsl(142, 76%, 36%);
+  --accent-foreground: hsl(210, 40%, 98%);
+  --destructive: hsl(0, 62%, 30%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --border: hsl(215, 28%, 17%);
+  --input: hsl(215, 28%, 17%);
+  --ring: hsl(221, 83%, 53%);
+  --chart-1: hsl(221, 83%, 53%);
+  --chart-2: hsl(142, 76%, 36%);
+  --chart-3: hsl(45, 93%, 47%);
+  --chart-4: hsl(0, 84%, 60%);
+  --chart-5: hsl(271, 91%, 65%);
+  
+  /* SQL Assistant specific dark mode variables */
+  --dark-bg: hsl(222, 84%, 4.9%);
+  --dark-surface: hsl(217, 32%, 17%);
+  --dark-border: hsl(215, 28%, 17%);
+  --sidebar-background: var(--card);
+  --sidebar-foreground: var(--card-foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  }
+
+  /* SQL Assistant specific styles */
+  .sql-assistant-layout {
+    @apply h-screen overflow-hidden bg-background;
+  }
+
+  .sql-sidebar {
+    @apply w-64 bg-sidebar-background border-r border-sidebar-border flex flex-col transition-colors duration-300;
+  }
+
+  .sql-main-content {
+    @apply flex-1 flex flex-col overflow-hidden;
+  }
+
+  .sql-top-bar {
+    @apply h-14 bg-sidebar-background border-b border-sidebar-border flex items-center justify-between px-6;
+  }
+
+  .sql-chat-interface {
+    @apply flex-1 flex overflow-hidden;
+  }
+
+  .sql-results-panel {
+    @apply w-96 border-l border-sidebar-border bg-sidebar-background;
+  }
+
+  /* Message bubble styles */
+  .message-user {
+    @apply bg-primary text-primary-foreground rounded-lg px-4 py-3 max-w-md ml-auto;
+  }
+
+  .message-assistant {
+    @apply bg-card border border-border rounded-lg p-4 max-w-4xl shadow-sm;
+  }
+
+  /* SQL code block styles */
+  .sql-code-block {
+    @apply bg-muted rounded-lg p-4 font-mono text-sm border border-border;
+  }
+
+  .sql-code-block pre {
+    @apply overflow-x-auto text-foreground;
+  }
+
+  .sql-code-block code {
+    @apply text-sm;
+  }
+
+  /* Query explanation styles */
+  .query-explanation {
+    @apply bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-200 dark:border-blue-800;
+  }
+
+  .query-explanation h4 {
+    @apply text-sm font-medium text-foreground mb-2;
+  }
+
+  .query-explanation p,
+  .query-explanation ul {
+    @apply text-sm text-muted-foreground;
+  }
+
+  /* Chart container styles */
+  .chart-container {
+    @apply bg-muted rounded-lg p-4 border border-border;
+  }
+
+  .chart-container h4 {
+    @apply text-sm font-medium text-foreground mb-3;
+  }
+
+  /* Action button styles */
+  .sql-action-buttons {
+    @apply flex items-center space-x-2 mt-4;
+  }
+
+  .sql-action-button {
+    @apply flex items-center space-x-1 px-3 py-1.5 rounded-md text-xs font-medium transition-colors;
+  }
+
+  .sql-action-button.primary {
+    @apply bg-accent text-accent-foreground hover:bg-accent;
+  }
+
+  .sql-action-button.secondary {
+    @apply bg-muted text-muted-foreground hover:bg-muted;
+  }
+
+  /* Loading animation styles */
+  .loading-dots {
+    @apply flex space-x-1;
+  }
+
+  .loading-dot {
+    @apply w-2 h-2 bg-primary rounded-full animate-bounce;
+  }
+
+  .loading-dot:nth-child(1) {
+    animation-delay: 0ms;
+  }
+
+  .loading-dot:nth-child(2) {
+    animation-delay: 150ms;
+  }
+
+  .loading-dot:nth-child(3) {
+    animation-delay: 300ms;
+  }
+
+  /* Status indicator styles */
+  .status-indicator {
+    @apply w-2 h-2 rounded-full;
+  }
+
+  .status-indicator.connected {
+    @apply bg-green-500;
+  }
+
+  .status-indicator.connecting {
+    @apply bg-yellow-500;
+  }
+
+  .status-indicator.disconnected {
+    @apply bg-red-500;
+  }
+
+  /* Schema card styles */
+  .schema-card {
+    @apply cursor-pointer transition-colors hover:bg-muted/50 border border-border rounded-lg;
+  }
+
+  .schema-card.selected {
+    @apply ring-2 ring-primary border-primary;
+  }
+
+  /* Query card styles */
+  .query-card {
+    @apply cursor-pointer transition-colors hover:bg-muted/50 border border-border rounded-lg;
+  }
+
+  .query-card.selected {
+    @apply ring-2 ring-primary border-primary;
+  }
+
+  /* Results table styles */
+  .results-table {
+    @apply w-full text-sm border-collapse;
+  }
+
+  .results-table th {
+    @apply px-3 py-2 text-left text-xs font-medium text-muted-foreground uppercase bg-muted border-b border-border;
+  }
+
+  .results-table td {
+    @apply px-3 py-2 text-foreground border-b border-border;
+  }
+
+  .results-table tr:hover {
+    @apply bg-muted/50;
+  }
+
+  /* Scrollbar styles */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/30 rounded-full;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/50;
+  }
+
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+
+  .animate-pulse-glow {
+    animation: pulseGlow 2s infinite;
+  }
+
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    0% { 
+      transform: translateY(10px); 
+      opacity: 0; 
+    }
+    100% { 
+      transform: translateY(0); 
+      opacity: 1; 
+    }
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% { 
+      box-shadow: 0 0 5px hsl(221, 83%, 53%, 0.5); 
+    }
+    50% { 
+      box-shadow: 0 0 20px hsl(221, 83%, 53%, 0.8); 
+    }
+  }
+
+  /* Typography enhancements */
+  .sql-heading {
+    @apply text-foreground font-semibold tracking-tight;
+  }
+
+  .sql-subheading {
+    @apply text-muted-foreground text-sm;
+  }
+
+  .sql-body {
+    @apply text-foreground leading-relaxed;
+  }
+
+  .sql-caption {
+    @apply text-muted-foreground text-xs;
+  }
+
+  /* Interactive elements */
+  .sql-button {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring;
+    @apply disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .sql-button.primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary;
+  }
+
+  .sql-button.secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary;
+  }
+
+  .sql-button.outline {
+    @apply border border-border bg-background hover:bg-accent hover:text-accent-foreground;
+  }
+
+  .sql-button.ghost {
+    @apply hover:bg-accent hover:text-accent-foreground;
+  }
+
+  /* Form elements */
+  .sql-input {
+    @apply flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm;
+    @apply ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium;
+    @apply placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2;
+    @apply focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .sql-textarea {
+    @apply flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm;
+    @apply ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none;
+    @apply focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  /* Badge styles */
+  .sql-badge {
+    @apply inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold;
+    @apply transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
+  }
+
+  .sql-badge.default {
+    @apply border-transparent bg-primary text-primary-foreground hover:bg-primary;
+  }
+
+  .sql-badge.secondary {
+    @apply border-transparent bg-secondary text-secondary-foreground hover:bg-secondary;
+  }
+
+  .sql-badge.outline {
+    @apply text-foreground;
+  }
+
+  /* Card enhancements */
+  .sql-card {
+    @apply rounded-lg border border-border bg-card text-card-foreground shadow-sm;
+  }
+
+  .sql-card-header {
+    @apply flex flex-col space-y-1.5 p-6;
+  }
+
+  .sql-card-content {
+    @apply p-6 pt-0;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .sql-sidebar {
+      @apply w-full h-auto border-r-0 border-b border-sidebar-border;
+    }
+    
+    .sql-results-panel {
+      @apply w-full border-l-0 border-t border-sidebar-border;
+    }
+    
+    .sql-chat-interface {
+      @apply flex-col;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .sql-code-block {
+      @apply border-2;
+    }
+    
+    .sql-button {
+      @apply border-2;
+    }
+    
+    .message-assistant {
+      @apply border-2;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in,
+    .animate-slide-up,
+    .animate-pulse-glow,
+    .loading-dot {
+      animation: none;
+    }
+    
+    .transition-colors,
+    .transition-all {
+      transition: none;
+    }
+  }
+}
