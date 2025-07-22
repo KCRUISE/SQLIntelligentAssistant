@@ -92,7 +92,6 @@ SQL 어시스턴트는 OpenAI의 GPT-4o를 사용하여 자연어 쿼리를 최�
 
 1. **저장소 클론**
    ```bash
-   ```
    git clone https://github.com/KCRUISE/SQLIntelligentAssistant.git
    cd SQLIntelligentAssistant
    ```
